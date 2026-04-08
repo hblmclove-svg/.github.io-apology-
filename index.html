@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>对不起，我真的错了</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #fff5f5, #fef8f8);
+            color: #5c4d4f;
+            min-height: 100vh;
+            padding: 30px 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* 樱花飘落 */
+        .sakura {
+            position: absolute;
+            background: #f8d7da;
+            border-radius: 100% 0 100% 50%;
+            transform: rotate(-15deg);
+            opacity: 0.7;
+            animation: fall 7s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .container {
+            max-width: 380px;
+            margin: 0 auto;
+            padding-top: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            text-align: center;
+            font-size: 26px;
+            font-weight: 500;
+            color: #e5989b;
+            margin-bottom: 50px;
+            letter-spacing: 3px;
+            opacity: 0;
+            animation: fadeIn 1.2s 0.3s forwards;
+        }
+
+        .text {
+            font-size: 16px;
+            line-height: 2;
+            margin-bottom: 28px;
+            opacity: 0;
+            animation: fadeIn 1.2s forwards;
+            text-align: left;
+        }
+
+        .t1 { animation-delay: 0.8s; }
+        .t2 { animation-delay: 1.4s; }
+        .t3 { animation-delay: 2.0s; }
+        .t4 { animation-delay: 2.6s; }
+        .t5 { animation-delay: 3.2s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .heart {
+            text-align: center;
+            font-size: 24px;
+            color: #e5989b;
+            margin: 40px 0;
+            opacity: 0;
+            animation: fadeIn 1.2s 3.8s forwards, heartbeat 1.5s 4.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%,100% { transform: scale(1); }
+            50% { transform: scale(1.12); }
+        }
+
+        .btn-box {
+            text-align: center;
+            margin-top: 50px;
+            opacity: 0;
+            animation: fadeIn 1.2s 4.2s forwards;
+        }
+
+        .btn {
+            padding: 14px 40px;
+            border-radius: 30px;
+            border: none;
+            background: #e5989b;
+            color: #fff;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .sign {
+            text-align: right;
+            margin-top: 70px;
+            font-size: 14px;
+            color: #b0a0a3;
+            opacity: 0;
+            animation: fadeIn 1.2s 4.5s forwards;
+        }
+
+        /* 弹窗 */
+        .modal {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.35);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            z-index: 999;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 35px 25px;
+            border-radius: 20px;
+            max-width: 300px;
+            text-align: center;
+            animation: pop 0.3s forwards;
+        }
+
+        @keyframes pop {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">💌 致我最在意的你</div>
+
+        <div class="text t1">
+            对不起。
+        </div>
+        <div class="text t2">
+            这一次，我不找任何借口，是我彻头彻尾的错。
+        </div>
+        <div class="text t3">
+            我忽略了你的情绪，固执又粗心，让你委屈、难过、失望。
+            你沉默的每一刻，我都记在心里，越想越愧疚。
+        </div>
+        <div class="text t4">
+            你是我最不想失去的人，我却用最笨的方式伤害了你。
+            我愿意改，愿意耐心，愿意把所有温柔都补给你。
+        </div>
+        <div class="text t5">
+            我不求立刻被原谅，只希望你愿意给我一个弥补的机会。
+            我会一直等，等到你愿意理我为止。
+        </div>
+
+        <div class="heart">❤️</div>
+
+        <div class="btn-box">
+            <button class="btn" onclick="openModal()">我知道错了</button>
+        </div>
+
+        <div class="sign">
+            骆<br>
+            2026.04.08
+        </div>
+    </div>
+
+    <!-- 真诚弹窗 -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div style="font-size:22px; margin-bottom:15px;">🥺</div>
+            <div style="font-size:15px; line-height:1.8;">
+                我真的很认真在道歉<br>
+                不敢奢求你马上原谅<br>
+                只希望你别再因为我难过
+            </div>
+            <button style="margin-top:25px; padding:10px 28px; border-radius:20px; border:none; background:#f8d7da; color:#fff;" onclick="closeModal()">我知道了</button>
+        </div>
+    </div>
+
+    <script>
+        // 樱花飘落
+        function createSakura() {
+            const s = document.createElement('div');
+            s.className = 'sakura';
+            const size = 6 + Math.random() * 8;
+            s.style.width = size + 'px';
+            s.style.height = size*1.3 + 'px';
+            s.style.left = Math.random()*100 + 'vw';
+            s.style.animationDuration = (6 + Math.random()*5) + 's';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 7000);
+        }
+        setInterval(createSakura, 500);
+
+        // 弹窗
+        function openModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
